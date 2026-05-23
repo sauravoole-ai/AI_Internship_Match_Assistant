@@ -7,8 +7,7 @@
 
 ## 🌐 Live Demo
 
-🚧 Deployment link will be added after hosting.
-
+🔗 Live App: https://ai-internship-match-assistant.onrender.com
 ---
 
 ## 📌 Project Overview
