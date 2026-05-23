@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Internship Match Assistant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="floating-shape shape-one"></div>
+    <div class="floating-shape shape-two"></div>
+    <div class="floating-shape shape-three"></div>
+
+    <div class="page-wrapper">
+
+        <header class="hero-section">
+            <div class="utility-bar">
+    <button id="themeToggle" class="theme-toggle" type="button">Light Mode</button>
+</div>
+
+<div class="badge">AI Internship Match Assistant</div>
+
+            <h1>See How Well Your Resume Fits the Role</h1>
+
+            <p class="hero-subtitle">
+                Upload or paste your resume and job description to get a realistic match score,
+                missing skills, ATS keywords, project relevance insights, and practical improvement suggestions.
+            </p>
+
+            <div class="feature-row">
+                <div class="feature-card">
+                    <span>01</span>
+                    <h3>Resume–JD Analysis</h3>
+                    <p>Compare your resume with a role description and understand your actual fit.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span>02</span>
+                    <h3>Skill Gap Signals</h3>
+                    <p>Identify matching, partial, and missing skills without overclaiming.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span>03</span>
+                    <h3>RAG-style Assistant</h3>
+                    <p>Ask follow-up questions using retrieved resume and JD context.</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-card">
+
+            <div class="section-heading">
+                <p>Analyze your fit</p>
+                <h2>Upload Files or Paste Text</h2>
+            </div>
+
+            <section class="upload-grid">
+                <div class="upload-panel">
+                    <div class="upload-text">
+                        <h3>Resume Upload</h3>
+                        <p>Upload your resume as PDF/DOCX, or paste resume text manually below.</p>
+                    </div>
+
+                    <label class="upload-box" for="resumeFile">
+                        <input id="resumeFile" type="file" accept=".pdf,.docx">
+                        <span class="upload-icon">↑</span>
+                        <span class="upload-title">Choose Resume File</span>
+                        <span id="resumeFileName" class="upload-file-name">No file selected</span>
+                    </label>
+                </div>
+
+                <div class="upload-panel">
+                    <div class="upload-text">
+                        <h3>JD Upload</h3>
+                        <p>Upload job description as PDF/DOCX/TXT, or paste the JD manually below.</p>
+                    </div>
+
+                    <label class="upload-box" for="jdFile">
+                        <input id="jdFile" type="file" accept=".pdf,.docx,.txt">
+                        <span class="upload-icon">↑</span>
+                        <span class="upload-title">Choose JD File</span>
+                        <span id="jdFileName" class="upload-file-name">No file selected</span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="input-grid">
+                <div class="input-box">
+                    <label for="resumeText">Resume Text <span>optional if resume file uploaded</span></label>
+                    <textarea id="resumeText" placeholder="Paste your resume text here if you are not uploading a file..."></textarea>
+                </div>
+
+                <div class="input-box">
+                    <label for="jdText">Job Description <span>optional if JD file uploaded</span></label>
+                    <textarea id="jdText" placeholder="Paste internship or job description here if you are not uploading a file..."></textarea>
+                </div>
+            </section>
+
+            <div class="action-row">
+                <button id="analyzeBtn" class="primary-btn">Analyze My Match</button>
+                <button id="clearBtn" class="secondary-btn" type="button">Clear All</button>
+            </div>
+
+            <section class="result-section">
+                <div class="result-header">
+                    <div>
+                        <p>AI generated insight</p>
+                        <h2>Analysis Result</h2>
+                    </div>
+
+                    <div class="result-actions">
+                        <div class="status-pill">Ready</div>
+                        <button id="copyBtn" class="small-action-btn" type="button">Copy Result</button>
+                        <button id="downloadBtn" class="small-action-btn" type="button">Download Report</button>
+                    </div>
+                </div>
+
+                <div id="loadingText" class="loading hidden">
+                    Analyzing your resume and job description...
+                </div>
+
+                <article id="resultBox" class="result-card empty-result">
+                    <p>Your analysis will appear here in a clean reading format.</p>
+                </article>
+            </section>
+
+            <section class="assistant-section">
+                <div class="assistant-header">
+                    <div>
+                        <p>RAG-style follow-up assistant</p>
+                        <h2>Ask About Your Resume–JD Fit</h2>
+                    </div>
+                    <span class="assistant-pill">Uses retrieved context</span>
+                </div>
+
+                <div class="assistant-suggestions">
+                    <button class="suggestion-chip" type="button">Which skill should I learn first?</button>
+                    <button class="suggestion-chip" type="button">What keywords can I honestly add?</button>
+                    <button class="suggestion-chip" type="button">Rewrite my project section for this JD.</button>
+                </div>
+
+                <div class="assistant-input-row">
+                    <textarea id="followupQuestion" placeholder="Ask a follow-up question after running analysis..."></textarea>
+                    <button id="askBtn" class="primary-btn assistant-btn" type="button">Ask Assistant</button>
+                </div>
+
+                <div id="assistantLoading" class="loading hidden">
+                    Retrieving relevant context and preparing answer...
+                </div>
+
+                <article id="assistantAnswer" class="assistant-answer empty-result">
+                    <p>After analysis, ask questions like: “Why is my score low?” or “What should I improve first?”</p>
+                </article>
+
+                <details id="retrievedContextWrapper" class="retrieved-context hidden">
+                    <summary>Retrieved Context Used</summary>
+                    <pre id="retrievedContextBox">Relevant resume/JD chunks will appear here after a follow-up answer.</pre>
+                </details>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
