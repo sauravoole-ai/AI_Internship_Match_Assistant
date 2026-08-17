@@ -237,7 +237,7 @@ Job Description:
 """
 
         response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="openai/gpt-oss-20b",
             messages=[
                 {
                     "role": "system",
@@ -248,6 +248,8 @@ Job Description:
                     "content": prompt
                 }
             ],
+            reasoning_effort="medium",
+            include_reasoning=False,
             temperature=0.2,
             max_tokens=1700
         )
@@ -330,7 +332,7 @@ User Question:
 """
 
         response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="openai/gpt-oss-20b",
             messages=[
                 {
                     "role": "system",
@@ -341,6 +343,8 @@ User Question:
                     "content": prompt
                 }
             ],
+            reasoning_effort="low",
+            include_reasoning=False,
             temperature=0.25,
             max_tokens=900
         )
