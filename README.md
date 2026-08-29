@@ -94,7 +94,7 @@ Which RAG and vector database skills are missing?
 ### 🧠 AI / LLM
 
 - Groq API
-- Llama 3.1 8B Instant
+- openai/gpt-oss-20b
 
 ### 📄 Document Processing
 
