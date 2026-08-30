@@ -185,7 +185,7 @@ This project currently includes a **RAG-style contextual follow-up assistant**.
 ## 📁 Project Structure
 
 ```text
-AI_Resume_JD_Analyzer/
+AI_Internship_Match_Assistant/
 │
 ├── app.py
 ├── rag_utils.py
@@ -210,8 +210,8 @@ AI_Resume_JD_Analyzer/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone your_repository_link_here
-cd AI_Resume_JD_Analyzer
+git clone https://github.com/sauravoole-ai/AI_Internship_Match_Assistant.git
+cd AI_Internship_Match_Assistant
 ```
 
 ### 2️⃣ Create a virtual environment

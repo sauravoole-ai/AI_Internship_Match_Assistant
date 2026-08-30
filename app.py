@@ -16,6 +16,8 @@ load_dotenv()
 app = Flask(__name__)
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+if not GROQ_API_KEY:
+    raise RuntimeError("GROQ_API_KEY not set in environment variables")
 
 client = Groq(api_key=GROQ_API_KEY)
 
@@ -270,9 +272,10 @@ Job Description:
         }), 400
 
     except Exception as error:
+        app.logger.error("Resume-JD analysis failed (%s)", type(error).__name__)
         return jsonify({
             "success": False,
-            "error": str(error)
+            "error": "An unexpected error occurred while analyzing the resume and job description."
         }), 500
 
 
@@ -358,9 +361,10 @@ User Question:
         })
 
     except Exception as error:
+        app.logger.error("Follow-up question failed (%s)", type(error).__name__)
         return jsonify({
             "success": False,
-            "error": str(error)
+            "error": "An unexpected error occurred while answering the follow-up question."
         }), 500
 
 
@@ -386,11 +390,12 @@ def download_report():
         )
 
     except Exception as error:
+        app.logger.error("PDF report generation failed (%s)", type(error).__name__)
         return jsonify({
             "success": False,
-            "error": str(error)
+            "error": "An unexpected error occurred while generating the PDF report."
         }), 500
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=os.getenv("FLASK_DEBUG", "false").lower() == "true")
